@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}{{Board.person_full_name}}{% endblock %}
+{% block content %}
+
+    <style>
+
+    </style>
+    <div class="detail-text-com">
+        <div class="detaul-title">
+            <h3>{{Board.person_post}}</h3><br>
+            <p class="board-text-person">{{Board.person_work}}</p>
+        </div>
+        <div class="comments-text">
+            {% if comments %}
+                {% for com in comments %}
+                    <p>
+                        <p>Комментарий: {{com.text}}</p>
+                    </p>
+                {% endfor %}
+            {% else %}
+                    Пока комментариев нет
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <form action="{% url 'CaseBoard:leave_comment' Board.id %}" method="POST">
+            {% csrf_token %}
+            <textarea name="text" required placeholder="Текст комментария" cols="30" rows="10"></textarea><br>
+            <button type="submit">Оставить комментарий</button>
+        </form>
+    </div>
+{% endblock %}

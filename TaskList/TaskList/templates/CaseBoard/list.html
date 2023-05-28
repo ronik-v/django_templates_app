@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Список персональных дел{% endblock %}
+{% block content %}
+    {% if all_things %}
+        <style>
+            #main-case-board-title {
+                color: black;
+                text-decoration: underline;
+                padding-bottom: 5px;
+            }
+        </style>
+        <div id="main-case-board-title">
+            <h1>Данный сервис поможет отразить задачи на день для сотрудников</h1>
+        </div>
+        {% for obj in all_things %}
+        <style>
+            div {
+                background-color: aqua;
+            }
+            .board {
+                color: #052b5a;
+                border-bottom: 2px dashed #0f6ee3;
+                padding-bottom: 3px;
+            }
+
+            .board-title {
+                text-decoration: underline;
+            }
+
+            .board-post {
+                color: black;
+            }
+            .board-case-text {
+                color: black;
+                margin-right: 5px;
+            }
+            .board-case-deadline {
+                color: black;
+                font-style: italic;
+                margin-right: 5px;
+            }
+        </style>
+            <div class="board">
+                <h2 class="board-title">{{obj.person_full_name}} <a href="{% url 'CaseBoard:detail' obj.id %}">Комментарии</a></h2>
+                <h3 class="board-post">{{obj.person_post}}</h3>
+                <p class="board-case-text">{{obj.person_work}}</p>
+                <p class="board-case-deadline">Срок: {{obj.person_deadline}}</p>
+            </div>
+            </div>
+        {% endfor %}
+    {% else %}
+            Дела не найденны...
+    {% endif %}
+{% endblock %}
