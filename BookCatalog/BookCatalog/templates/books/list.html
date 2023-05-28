@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Книги{% endblock %}
+
+
+{% block content %}
+    {% if all_books_genre %}
+        {% for genre in all_books_genre %}
+            <ul class="genre-text">
+                <a href="/books/{{genre}}">{{genre}}</a>
+            </ul>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

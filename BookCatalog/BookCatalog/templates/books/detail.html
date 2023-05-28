@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{Books.genre}}{% endblock %}
+
+
+{% block content %}
+   {% for b in Books %}
+        <div>
+            <img src="{{ b.cover.url }}" alt="">
+            <ul>
+                <h2>{{b.name}}</h2>
+                <p><b>Издательство:</b>{{b.publishing_house}}</p>
+                <p><b>Автор:</b>{{b.autor}}</p>
+                <p><b>Год издания:</b>{{b.year}}</p>
+            </ul>
+        </div>
+        <div>
+            <h3>Описание книги</h3>
+            <em>{{b.description}}</em><br>
+        </div>
+        <div class="comments-list">
+            {% if comments %}
+                {% for c in Comments %}
+                <strong>{{c.autor_name}}</strong>        
+                <p>{{c.text}}</p>
+                {% endfor %}
+            {% else %}
+                Коммнентарии не найденны...
+            {% endif %}
+        </div><br>
+        <div class="comments-form">
+            <div>
+                <h3>Коммнентарии:</h3>
+            </div>
+            <form action="/books/{{b.genre}}/leave_comment" method="POST">
+                {% csrf_token %}
+                <input type="text" required placeholder="Ваше имя" name="name"><br>
+                <textarea name="text" required="" placeholder="Текст комментария" cols="30" rows="10"></textarea><br>
+                <button type="submit">Оставить комментарий</button>
+            </form>
+        </div>
+    {% endfor %}
+
+{% endblock %}
