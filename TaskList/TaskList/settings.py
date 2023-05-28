@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
-SECRET_KEY = 'django-insecure-5k@e+g1$m$a%1+_n4b22*h9a@8m-z%$o3gfwmt*f1i2^a+*or$'
+SECRET_KEY = ''
 
 DEBUG = False
 
